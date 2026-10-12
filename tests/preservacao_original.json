@@ -1,0 +1,12 @@
+{
+  "codigo_fonte_sha256": "a6b32c2f3290bfccb252a224ee6930aefd60488d52d4219f12f24c536faecfe8",
+  "dados_aurora_siger_sha256": "62d89c5fb767d5e35a19b23bcf1b7da7339d36a4621405b7a33545e050543ddc",
+  "funcoes": {
+    "carregar_dados": "c66f483f9702d4e99e92a9739620fb0468a2dc17a50da9e7aa9fc54a3a1c51e3",
+    "visualizar_dados": "6705d3feff6145566eab6cfc0104189aae04642c8f4cc053f8d67744a0b0c4ba",
+    "consultar_registros": "9c1c5c7967aac4067b6a39245e0c11d1ab1efe6d23886beb14ef0c7437f0caab",
+    "classificar_erro_relativo": "25d8096cab9eb38d5c23a4357b35ed9226d61aced8202ffaeac963a604fc3be1",
+    "calcular_indicadores_erros": "02172b7bcdcb9c2ea35c1e6030fce1b811b68794933250455b84946516b67bee",
+    "executar_modelo_previsao": "09e8721ae36ed66baee7054461dbfe4787dca0cc651305eefda66564dd80bab0"
+  }
+}
