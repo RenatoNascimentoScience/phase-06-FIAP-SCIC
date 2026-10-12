@@ -39,6 +39,10 @@ def coluna_numerica(dados: pd.DataFrame, campo: str) -> pd.Series:
     """Valide valores reais, finitos e não negativos, mantendo o DataFrame."""
     validar_colunas(dados, [campo])
     coluna = dados[campo]
+    if coluna.empty:
+        return coluna.astype(float)
+    if coluna.isna().any():
+        raise ValueError(f"O campo '{campo}' não pode conter valores ausentes.")
     if not pd.api.types.is_numeric_dtype(coluna) or pd.api.types.is_bool_dtype(coluna):
         raise ValueError(f"O campo '{campo}' deve conter números reais.")
     if pd.api.types.is_complex_dtype(coluna):
