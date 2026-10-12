@@ -1,0 +1,874 @@
+{
+  "versoes": {
+    "python": "3.12.10",
+    "numpy": "2.5.0",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.0"
+  },
+  "preservacao": {
+    "codigo_fonte.py": "a6b32c2f3290bfccb252a224ee6930aefd60488d52d4219f12f24c536faecfe8",
+    "dados_aurora_siger.csv": "62d89c5fb767d5e35a19b23bcf1b7da7339d36a4621405b7a33545e050543ddc"
+  },
+  "heap": {
+    "total_inicial": 10,
+    "proximo": {
+      "registro": {
+        "ciclo": 7,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-01",
+        "latencia_prevista_ms": 124,
+        "latencia_observada_ms": 160,
+        "tensao_v": 22.8,
+        "corrente_a": 2.55,
+        "status": "Alerta",
+        "prioridade": 5,
+        "criticidade": 5,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Latencia critica no enlace principal"
+      },
+      "criterios": {
+        "prioridade": 5,
+        "criticidade": 5,
+        "modulo_essencial": 1,
+        "ciclo": 7,
+        "ordem_insercao": 2
+      },
+      "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+    },
+    "retirado": {
+      "registro": {
+        "ciclo": 7,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-01",
+        "latencia_prevista_ms": 124,
+        "latencia_observada_ms": 160,
+        "tensao_v": 22.8,
+        "corrente_a": 2.55,
+        "status": "Alerta",
+        "prioridade": 5,
+        "criticidade": 5,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Latencia critica no enlace principal"
+      },
+      "criterios": {
+        "prioridade": 5,
+        "criticidade": 5,
+        "modulo_essencial": 1,
+        "ciclo": 7,
+        "ordem_insercao": 2
+      },
+      "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+    },
+    "total_apos_retirada": 9,
+    "ordem_restante": [
+      {
+        "registro": {
+          "ciclo": 7,
+          "modulo": "Suporte Medico",
+          "tipo_modulo": "suporte_medico",
+          "codigo_sensor": "MED-01",
+          "latencia_prevista_ms": 154,
+          "latencia_observada_ms": 215,
+          "tensao_v": 10.9,
+          "corrente_a": 2.3,
+          "status": "Alerta",
+          "prioridade": 5,
+          "criticidade": 5,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Atraso critico no canal medico"
+        },
+        "criterios": {
+          "prioridade": 5,
+          "criticidade": 5,
+          "modulo_essencial": 1,
+          "ciclo": 7,
+          "ordem_insercao": 8
+        },
+        "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 8,
+          "modulo": "Armazenamento de Dados",
+          "tipo_modulo": "armazenamento_dados",
+          "codigo_sensor": "DAT-02",
+          "latencia_prevista_ms": 141,
+          "latencia_observada_ms": 190,
+          "tensao_v": 10.8,
+          "corrente_a": 2.05,
+          "status": "Alerta",
+          "prioridade": 5,
+          "criticidade": 4,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Latencia critica no armazenamento de dados"
+        },
+        "criterios": {
+          "prioridade": 5,
+          "criticidade": 4,
+          "modulo_essencial": 1,
+          "ciclo": 8,
+          "ordem_insercao": 9
+        },
+        "justificativa": "Prioridade 5; criticidade 4; módulo essencial: sim; ciclo 8. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 4,
+          "modulo": "Agricultura Hidroponica",
+          "tipo_modulo": "agricultura",
+          "codigo_sensor": "AGR-02",
+          "latencia_prevista_ms": 195,
+          "latencia_observada_ms": 230,
+          "tensao_v": 22.9,
+          "corrente_a": 3.3,
+          "status": "Alerta",
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "mensagem_alerta": "Atraso critico na telemetria agricola"
+        },
+        "criterios": {
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "ciclo": 4,
+          "ordem_insercao": 5
+        },
+        "justificativa": "Prioridade 4; criticidade 4; módulo essencial: não; ciclo 4. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 5,
+          "modulo": "Laboratorio Cientifico",
+          "tipo_modulo": "laboratorio",
+          "codigo_sensor": "LAB-01",
+          "latencia_prevista_ms": 218,
+          "latencia_observada_ms": 260,
+          "tensao_v": 22.7,
+          "corrente_a": 2.85,
+          "status": "Alerta",
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "mensagem_alerta": "Instabilidade critica no enlace do laboratorio"
+        },
+        "criterios": {
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "ciclo": 5,
+          "ordem_insercao": 6
+        },
+        "justificativa": "Prioridade 4; criticidade 4; módulo essencial: não; ciclo 5. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 4,
+          "modulo": "Suporte Medico",
+          "tipo_modulo": "suporte_medico",
+          "codigo_sensor": "MED-02",
+          "latencia_prevista_ms": 155,
+          "latencia_observada_ms": 170,
+          "tensao_v": 11.7,
+          "corrente_a": 2.0,
+          "status": "Manutencao",
+          "prioridade": 4,
+          "criticidade": 3,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Atraso no canal de suporte medico"
+        },
+        "criterios": {
+          "prioridade": 4,
+          "criticidade": 3,
+          "modulo_essencial": 1,
+          "ciclo": 4,
+          "ordem_insercao": 7
+        },
+        "justificativa": "Prioridade 4; criticidade 3; módulo essencial: sim; ciclo 4. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 4,
+          "modulo": "Comunicacao Central",
+          "tipo_modulo": "comunicacao",
+          "codigo_sensor": "COM-02",
+          "latencia_prevista_ms": 128,
+          "latencia_observada_ms": 145,
+          "tensao_v": 23.6,
+          "corrente_a": 2.3,
+          "status": "Manutencao",
+          "prioridade": 3,
+          "criticidade": 3,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Latencia acima da faixa esperada"
+        },
+        "criterios": {
+          "prioridade": 3,
+          "criticidade": 3,
+          "modulo_essencial": 1,
+          "ciclo": 4,
+          "ordem_insercao": 1
+        },
+        "justificativa": "Prioridade 3; criticidade 3; módulo essencial: sim; ciclo 4. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 2,
+          "modulo": "Comunicacao Central",
+          "tipo_modulo": "comunicacao",
+          "codigo_sensor": "COM-02",
+          "latencia_prevista_ms": 125,
+          "latencia_observada_ms": 132,
+          "tensao_v": 23.9,
+          "corrente_a": 2.15,
+          "status": "Manutencao",
+          "prioridade": 2,
+          "criticidade": 2,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Oscilacao moderada de latencia"
+        },
+        "criterios": {
+          "prioridade": 2,
+          "criticidade": 2,
+          "modulo_essencial": 1,
+          "ciclo": 2,
+          "ordem_insercao": 0
+        },
+        "justificativa": "Prioridade 2; criticidade 2; módulo essencial: sim; ciclo 2. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 2,
+          "modulo": "Agricultura Hidroponica",
+          "tipo_modulo": "agricultura",
+          "codigo_sensor": "AGR-02",
+          "latencia_prevista_ms": 188,
+          "latencia_observada_ms": 202,
+          "tensao_v": 23.7,
+          "corrente_a": 2.95,
+          "status": "Manutencao",
+          "prioridade": 2,
+          "criticidade": 2,
+          "modulo_essencial": 0,
+          "mensagem_alerta": "Atraso moderado na telemetria agricola"
+        },
+        "criterios": {
+          "prioridade": 2,
+          "criticidade": 2,
+          "modulo_essencial": 0,
+          "ciclo": 2,
+          "ordem_insercao": 4
+        },
+        "justificativa": "Prioridade 2; criticidade 2; módulo essencial: não; ciclo 2. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 5,
+          "modulo": "Habitacao Alfa",
+          "tipo_modulo": "habitacao",
+          "codigo_sensor": "HAB-01",
+          "latencia_prevista_ms": 173,
+          "latencia_observada_ms": 185,
+          "tensao_v": 11.6,
+          "corrente_a": 1.5,
+          "status": "Manutencao",
+          "prioridade": 2,
+          "criticidade": 2,
+          "modulo_essencial": 0,
+          "mensagem_alerta": "Variacao de latencia no modulo habitacional"
+        },
+        "criterios": {
+          "prioridade": 2,
+          "criticidade": 2,
+          "modulo_essencial": 0,
+          "ciclo": 5,
+          "ordem_insercao": 3
+        },
+        "justificativa": "Prioridade 2; criticidade 2; módulo essencial: não; ciclo 5. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      }
+    ]
+  },
+  "trie": {
+    "com": [
+      {
+        "ciclo": 1,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-01",
+        "latencia_prevista_ms": 120,
+        "latencia_observada_ms": 124,
+        "tensao_v": 24.0,
+        "corrente_a": 2.1,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 2,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-02",
+        "latencia_prevista_ms": 125,
+        "latencia_observada_ms": 132,
+        "tensao_v": 23.9,
+        "corrente_a": 2.15,
+        "status": "Manutencao",
+        "prioridade": 2,
+        "criticidade": 2,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Oscilacao moderada de latencia"
+      },
+      {
+        "ciclo": 3,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-01",
+        "latencia_prevista_ms": 123,
+        "latencia_observada_ms": 128,
+        "tensao_v": 24.1,
+        "corrente_a": 2.12,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 4,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-02",
+        "latencia_prevista_ms": 128,
+        "latencia_observada_ms": 145,
+        "tensao_v": 23.6,
+        "corrente_a": 2.3,
+        "status": "Manutencao",
+        "prioridade": 3,
+        "criticidade": 3,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Latencia acima da faixa esperada"
+      },
+      {
+        "ciclo": 5,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-01",
+        "latencia_prevista_ms": 130,
+        "latencia_observada_ms": 133,
+        "tensao_v": 24.0,
+        "corrente_a": 2.14,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 6,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-02",
+        "latencia_prevista_ms": 126,
+        "latencia_observada_ms": 129,
+        "tensao_v": 24.1,
+        "corrente_a": 2.11,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 7,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-01",
+        "latencia_prevista_ms": 124,
+        "latencia_observada_ms": 160,
+        "tensao_v": 22.8,
+        "corrente_a": 2.55,
+        "status": "Alerta",
+        "prioridade": 5,
+        "criticidade": 5,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Latencia critica no enlace principal"
+      },
+      {
+        "ciclo": 8,
+        "modulo": "Comunicacao Central",
+        "tipo_modulo": "comunicacao",
+        "codigo_sensor": "COM-02",
+        "latencia_prevista_ms": 129,
+        "latencia_observada_ms": 131,
+        "tensao_v": 24.0,
+        "corrente_a": 2.13,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      }
+    ],
+    "MED": [
+      {
+        "ciclo": 1,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-01",
+        "latencia_prevista_ms": 150,
+        "latencia_observada_ms": 152,
+        "tensao_v": 12.0,
+        "corrente_a": 1.8,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 2,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-02",
+        "latencia_prevista_ms": 152,
+        "latencia_observada_ms": 158,
+        "tensao_v": 11.9,
+        "corrente_a": 1.85,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 3,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-01",
+        "latencia_prevista_ms": 148,
+        "latencia_observada_ms": 150,
+        "tensao_v": 12.1,
+        "corrente_a": 1.82,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 4,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-02",
+        "latencia_prevista_ms": 155,
+        "latencia_observada_ms": 170,
+        "tensao_v": 11.7,
+        "corrente_a": 2.0,
+        "status": "Manutencao",
+        "prioridade": 4,
+        "criticidade": 3,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Atraso no canal de suporte medico"
+      },
+      {
+        "ciclo": 5,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-01",
+        "latencia_prevista_ms": 153,
+        "latencia_observada_ms": 156,
+        "tensao_v": 12.0,
+        "corrente_a": 1.86,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 6,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-02",
+        "latencia_prevista_ms": 149,
+        "latencia_observada_ms": 151,
+        "tensao_v": 12.1,
+        "corrente_a": 1.83,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      },
+      {
+        "ciclo": 7,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-01",
+        "latencia_prevista_ms": 154,
+        "latencia_observada_ms": 215,
+        "tensao_v": 10.9,
+        "corrente_a": 2.3,
+        "status": "Alerta",
+        "prioridade": 5,
+        "criticidade": 5,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Atraso critico no canal medico"
+      },
+      {
+        "ciclo": 8,
+        "modulo": "Suporte Medico",
+        "tipo_modulo": "suporte_medico",
+        "codigo_sensor": "MED-02",
+        "latencia_prevista_ms": 151,
+        "latencia_observada_ms": 154,
+        "tensao_v": 12.0,
+        "corrente_a": 1.84,
+        "status": "Ativo",
+        "prioridade": 1,
+        "criticidade": 1,
+        "modulo_essencial": 1,
+        "mensagem_alerta": "Operacao normal"
+      }
+    ]
+  },
+  "bases": {
+    "decimal": 7,
+    "binario": "111",
+    "hexadecimal": "7"
+  },
+  "eletricidade": {
+    "unidades": {
+      "tensao_v": "V",
+      "corrente_a": "A",
+      "potencia_w": "W"
+    },
+    "primeiro_registro": {
+      "ciclo": 1,
+      "modulo": "Comunicacao Central",
+      "tipo_modulo": "comunicacao",
+      "codigo_sensor": "COM-01",
+      "latencia_prevista_ms": 120,
+      "latencia_observada_ms": 124,
+      "tensao_v": 24.0,
+      "corrente_a": 2.1,
+      "status": "Ativo",
+      "prioridade": 1,
+      "criticidade": 1,
+      "modulo_essencial": 1,
+      "mensagem_alerta": "Operacao normal",
+      "potencia_w": 50.400000000000006
+    }
+  },
+  "analise_final": {
+    "total_registros": 48,
+    "registros_por_status": {
+      "Ativo": 38,
+      "Manutencao": 5,
+      "Alerta": 5
+    },
+    "registros_por_modulo": {
+      "Comunicacao Central": 8,
+      "Habitacao Alfa": 8,
+      "Agricultura Hidroponica": 8,
+      "Laboratorio Cientifico": 8,
+      "Suporte Medico": 8,
+      "Armazenamento de Dados": 8
+    },
+    "total_alertas_priorizados": 10,
+    "alertas_mais_urgentes": [
+      {
+        "registro": {
+          "ciclo": 7,
+          "modulo": "Comunicacao Central",
+          "tipo_modulo": "comunicacao",
+          "codigo_sensor": "COM-01",
+          "latencia_prevista_ms": 124,
+          "latencia_observada_ms": 160,
+          "tensao_v": 22.8,
+          "corrente_a": 2.55,
+          "status": "Alerta",
+          "prioridade": 5,
+          "criticidade": 5,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Latencia critica no enlace principal"
+        },
+        "criterios": {
+          "prioridade": 5,
+          "criticidade": 5,
+          "modulo_essencial": 1,
+          "ciclo": 7,
+          "ordem_insercao": 2
+        },
+        "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 7,
+          "modulo": "Suporte Medico",
+          "tipo_modulo": "suporte_medico",
+          "codigo_sensor": "MED-01",
+          "latencia_prevista_ms": 154,
+          "latencia_observada_ms": 215,
+          "tensao_v": 10.9,
+          "corrente_a": 2.3,
+          "status": "Alerta",
+          "prioridade": 5,
+          "criticidade": 5,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Atraso critico no canal medico"
+        },
+        "criterios": {
+          "prioridade": 5,
+          "criticidade": 5,
+          "modulo_essencial": 1,
+          "ciclo": 7,
+          "ordem_insercao": 8
+        },
+        "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 8,
+          "modulo": "Armazenamento de Dados",
+          "tipo_modulo": "armazenamento_dados",
+          "codigo_sensor": "DAT-02",
+          "latencia_prevista_ms": 141,
+          "latencia_observada_ms": 190,
+          "tensao_v": 10.8,
+          "corrente_a": 2.05,
+          "status": "Alerta",
+          "prioridade": 5,
+          "criticidade": 4,
+          "modulo_essencial": 1,
+          "mensagem_alerta": "Latencia critica no armazenamento de dados"
+        },
+        "criterios": {
+          "prioridade": 5,
+          "criticidade": 4,
+          "modulo_essencial": 1,
+          "ciclo": 8,
+          "ordem_insercao": 9
+        },
+        "justificativa": "Prioridade 5; criticidade 4; módulo essencial: sim; ciclo 8. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 4,
+          "modulo": "Agricultura Hidroponica",
+          "tipo_modulo": "agricultura",
+          "codigo_sensor": "AGR-02",
+          "latencia_prevista_ms": 195,
+          "latencia_observada_ms": 230,
+          "tensao_v": 22.9,
+          "corrente_a": 3.3,
+          "status": "Alerta",
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "mensagem_alerta": "Atraso critico na telemetria agricola"
+        },
+        "criterios": {
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "ciclo": 4,
+          "ordem_insercao": 5
+        },
+        "justificativa": "Prioridade 4; criticidade 4; módulo essencial: não; ciclo 4. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      },
+      {
+        "registro": {
+          "ciclo": 5,
+          "modulo": "Laboratorio Cientifico",
+          "tipo_modulo": "laboratorio",
+          "codigo_sensor": "LAB-01",
+          "latencia_prevista_ms": 218,
+          "latencia_observada_ms": 260,
+          "tensao_v": 22.7,
+          "corrente_a": 2.85,
+          "status": "Alerta",
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "mensagem_alerta": "Instabilidade critica no enlace do laboratorio"
+        },
+        "criterios": {
+          "prioridade": 4,
+          "criticidade": 4,
+          "modulo_essencial": 0,
+          "ciclo": 5,
+          "ordem_insercao": 6
+        },
+        "justificativa": "Prioridade 4; criticidade 4; módulo essencial: não; ciclo 5. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate."
+      }
+    ],
+    "latencia_observada_media_ms": 174.8125,
+    "resumo_eletrico": {
+      "potencia_media_w": 40.10608333333334,
+      "potencia_maxima_w": 75.57,
+      "tensao_minima_v": 10.8,
+      "tensao_maxima_v": 24.1,
+      "corrente_media_a": 2.105833333333333,
+      "potencia_media_por_modulo_w": {
+        "Comunicacao Central": 52.328500000000005,
+        "Habitacao Alfa": 17.087125,
+        "Agricultura Hidroponica": 69.24425,
+        "Laboratorio Cientifico": 59.475375,
+        "Suporte Medico": 22.58125,
+        "Armazenamento de Dados": 19.92
+      }
+    },
+    "condicoes_por_modulo": [
+      {
+        "modulo": "Comunicacao Central",
+        "registros": 8,
+        "registros_em_alerta": 1,
+        "registros_em_manutencao": 2,
+        "latencia_maxima_ms": 160.0,
+        "tensao_minima_v": 22.8,
+        "tensao_maxima_v": 24.1,
+        "potencia_media_w": 52.328500000000005
+      },
+      {
+        "modulo": "Habitacao Alfa",
+        "registros": 8,
+        "registros_em_alerta": 0,
+        "registros_em_manutencao": 1,
+        "latencia_maxima_ms": 185.0,
+        "tensao_minima_v": 11.6,
+        "tensao_maxima_v": 12.1,
+        "potencia_media_w": 17.087125
+      },
+      {
+        "modulo": "Agricultura Hidroponica",
+        "registros": 8,
+        "registros_em_alerta": 1,
+        "registros_em_manutencao": 1,
+        "latencia_maxima_ms": 230.0,
+        "tensao_minima_v": 22.9,
+        "tensao_maxima_v": 24.1,
+        "potencia_media_w": 69.24425
+      },
+      {
+        "modulo": "Laboratorio Cientifico",
+        "registros": 8,
+        "registros_em_alerta": 1,
+        "registros_em_manutencao": 0,
+        "latencia_maxima_ms": 260.0,
+        "tensao_minima_v": 22.7,
+        "tensao_maxima_v": 24.1,
+        "potencia_media_w": 59.475375
+      },
+      {
+        "modulo": "Suporte Medico",
+        "registros": 8,
+        "registros_em_alerta": 1,
+        "registros_em_manutencao": 1,
+        "latencia_maxima_ms": 215.0,
+        "tensao_minima_v": 10.9,
+        "tensao_maxima_v": 12.1,
+        "potencia_media_w": 22.58125
+      },
+      {
+        "modulo": "Armazenamento de Dados",
+        "registros": 8,
+        "registros_em_alerta": 1,
+        "registros_em_manutencao": 0,
+        "latencia_maxima_ms": 190.0,
+        "tensao_minima_v": 10.8,
+        "tensao_maxima_v": 12.1,
+        "potencia_media_w": 19.92
+      }
+    ],
+    "recomendacoes": [
+      {
+        "modulo": "Comunicacao Central",
+        "codigo_sensor": "COM-01",
+        "ciclo": 7,
+        "evidencias": {
+          "latencia_observada_ms": 160.0,
+          "latencia_prevista_ms": 124.0,
+          "tensao_v": 22.8,
+          "corrente_a": 2.55
+        },
+        "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate.",
+        "acao_proposta": "Conferir sensor, enlace e alimentação; comparar novas leituras e registrar recorrência para planejar manutenção. Avaliar conceitualmente um enlace redundante por se tratar de módulo essencial. O operador deve validar os dados e a ação antes de atuar."
+      },
+      {
+        "modulo": "Suporte Medico",
+        "codigo_sensor": "MED-01",
+        "ciclo": 7,
+        "evidencias": {
+          "latencia_observada_ms": 215.0,
+          "latencia_prevista_ms": 154.0,
+          "tensao_v": 10.9,
+          "corrente_a": 2.3
+        },
+        "justificativa": "Prioridade 5; criticidade 5; módulo essencial: sim; ciclo 7. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate.",
+        "acao_proposta": "Conferir sensor, enlace e alimentação; comparar novas leituras e registrar recorrência para planejar manutenção. Avaliar conceitualmente um enlace redundante por se tratar de módulo essencial. O operador deve validar os dados e a ação antes de atuar."
+      },
+      {
+        "modulo": "Armazenamento de Dados",
+        "codigo_sensor": "DAT-02",
+        "ciclo": 8,
+        "evidencias": {
+          "latencia_observada_ms": 190.0,
+          "latencia_prevista_ms": 141.0,
+          "tensao_v": 10.8,
+          "corrente_a": 2.05
+        },
+        "justificativa": "Prioridade 5; criticidade 4; módulo essencial: sim; ciclo 8. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate.",
+        "acao_proposta": "Conferir sensor, enlace e alimentação; comparar novas leituras e registrar recorrência para planejar manutenção. Avaliar conceitualmente um enlace redundante por se tratar de módulo essencial. O operador deve validar os dados e a ação antes de atuar."
+      },
+      {
+        "modulo": "Agricultura Hidroponica",
+        "codigo_sensor": "AGR-02",
+        "ciclo": 4,
+        "evidencias": {
+          "latencia_observada_ms": 230.0,
+          "latencia_prevista_ms": 195.0,
+          "tensao_v": 22.9,
+          "corrente_a": 3.3
+        },
+        "justificativa": "Prioridade 4; criticidade 4; módulo essencial: não; ciclo 4. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate.",
+        "acao_proposta": "Conferir sensor, enlace e alimentação; comparar novas leituras e registrar recorrência para planejar manutenção. Planejar inspeção considerando o impacto no módulo. O operador deve validar os dados e a ação antes de atuar."
+      },
+      {
+        "modulo": "Laboratorio Cientifico",
+        "codigo_sensor": "LAB-01",
+        "ciclo": 5,
+        "evidencias": {
+          "latencia_observada_ms": 260.0,
+          "latencia_prevista_ms": 218.0,
+          "tensao_v": 22.7,
+          "corrente_a": 2.85
+        },
+        "justificativa": "Prioridade 4; criticidade 4; módulo essencial: não; ciclo 5. Comparação nessa ordem, com números maiores primeiro nos três primeiros critérios, ciclo menor primeiro e ordem de inserção no empate.",
+        "acao_proposta": "Conferir sensor, enlace e alimentação; comparar novas leituras e registrar recorrência para planejar manutenção. Planejar inspeção considerando o impacto no módulo. O operador deve validar os dados e a ação antes de atuar."
+      }
+    ],
+    "gerenciamento_comunicacao": {
+      "monitoramento": "Comparar status, latência e alimentação a cada leitura; não presumir normalidade sem dados recentes.",
+      "automacao": "A heap organiza atendimento e a trie localiza registros; nenhuma delas executa transporte ou atuação remota.",
+      "armazenamento_redundancia": "Manter histórico das decisões e avaliar enlaces alternativos para módulos essenciais, sem assumir independência entre falhas.",
+      "manutencao": "Usar recorrência e inspeção para planejar manutenção; a base não contém histórico suficiente para prever falhas físicas.",
+      "microrredes": "Relacionar disponibilidade de energia e comunicação; reserva, geração e autonomia exigiriam medições adicionais."
+    },
+    "validacao_humana": "Revisar dados, prioridades e consequências antes de autorizar uma ação; registrar a justificativa da decisão.",
+    "limitacoes": [
+      "Dados simulados: os resultados não comprovam desempenho de uma rede real.",
+      "Prioridades são regras internas, não um modelo de risco treinado nem limites universais.",
+      "Variações de tensão e latência não demonstram, isoladamente, relação de causa e efeito.",
+      "Potência de alimentação em W não é energia em Wh nem potência irradiada por uma antena.",
+      "Sem duração dos ciclos, não é possível estimar energia consumida ou comparar instantes físicos.",
+      "Não há medição de redundância, falhas físicas, capacidade de baterias ou geração de uma microrrede.",
+      "A avaliação da regressão permanece na opção 4; esta síntese não recalcula suas métricas.",
+      "Toda recomendação exige revisão humana antes de alterar a operação."
+    ]
+  }
+}
