@@ -68,6 +68,8 @@ por caminho absoluto a partir de outro diretório.
 
 Consultar [contratos dos módulos](docs/contratos_modulos.md) e
 [guia para o integrante do menu](docs/integracao_menu.md).
+Os links e dependências das contribuições estão em
+[branches e revisão](docs/revisao_branches.md).
 
 Branches previstas: `chore/estrutura-modulos`, `feat/alertas-heap`,
 `feat/busca-trie`, `feat/bases-eletricidade`, `feat/analise-final`,
