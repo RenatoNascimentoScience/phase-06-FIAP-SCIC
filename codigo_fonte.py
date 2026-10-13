@@ -39,7 +39,7 @@ def carregar_dados(exibir_mensagem=False): # Define se o sistema mostra a inform
     
     except FileNotFoundError:
         print("\nERRO: o arquivo 'dados_aurora_siger.csv' não foi encontrado.")
-        print("Matenha o arquivo CSV na mesma posta de 'codigo_fonte.py'.")
+        print("Matenha o arquivo CSV na mesma pasta de 'codigo_fonte.py'.")
 
     except pd.errors.EmptyDataError:
         print("\nERRO: o arquivo CSV está vazio.")
@@ -169,7 +169,7 @@ def consultar_registros(dados):
                 dados["status"].str.lower() == pesquisa.lower()
             ]
 
-        # Colsunta por ciclo
+        # Consulta por ciclo
         elif opcao_consulta == "4":
             limpar_tela()
 

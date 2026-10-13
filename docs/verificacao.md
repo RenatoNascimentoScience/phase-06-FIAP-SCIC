@@ -2,41 +2,59 @@
 
 ## Resultado
 
-- 40 testes passaram no pacote extraído, usando um ambiente virtual novo com as
-  dependências de `requirements.txt` instaladas isoladamente.
-- O script de demonstração executou a partir de outro diretório, por caminho
+- O menu foi percorrido com entradas simuladas nas opções 0 a 8, sem erros de
+  execução. Nenhuma opção chama mais a mensagem provisória de desenvolvimento.
+- Entradas inválidas foram conferidas: opção inexistente, ciclo não numérico,
+  prefixo vazio, valor não inteiro e valor negativo na conversão de bases. Em
+  todos os casos o sistema não é interrompido e permanece no menu.
+- Dos 40 testes automatizados, 39 passam. O teste de preservação das funções
+  das opções 1 a 4 falha em cinco delas (`carregar_dados`, `visualizar_dados`,
+  `consultar_registros`, `calcular_indicadores_erros` e `executar_modelo_previsao`),
+  porque foram alteradas durante a integração do menu e o manifesto
+  `tests/preservacao_original.json` mantém os hashes registrados antes dessas
+  alterações. O teste do CSV passa.
+- O script de demonstração executa a partir de outro diretório, por caminho
   absoluto, com leitura correta do CSV.
-- O menu anterior foi percorrido com entradas simuladas: opções 1 a 4 e
-  encerramento funcionaram; as quatro opções provisórias foram preservadas.
-- O modelo anterior reproduziu MAE 8,15 ms, MSE 81,51 ms², RMSE 9,03 ms e
-  R² 0,9375, com 36 registros de treino e 12 de teste.
-- A heap contém dez registros; `com` e `MED` retornam oito registros cada;
-  ciclo 7 converte para binário 111 e hexadecimal 7; primeiro registro tem 50,40 W.
-- O ZIP candidato passou pela verificação de integridade e contém fontes, testes,
-  documentos e pendências explícitas, sem histórico Git, ambiente ou caches.
-- Os módulos novos não contêm chamadas a entrada ou impressão no terminal.
+- Os módulos de `src/` não contêm chamadas de entrada ou impressão no terminal;
+  a interação com o usuário fica em `codigo_fonte.py`.
+
+## Resultados conferidos por opção
+
+| Opção | Resultado com a base fornecida |
+| --- | --- |
+| 1 | 48 registros, 13 colunas, seis módulos, 12 sensores; 38 ativos, cinco em manutenção e cinco em alerta. |
+| 2 | Consultas por módulo, sensor, status e ciclo; `Com` retorna oito registros da Comunicação Central. |
+| 3 | Latência média 174,81 ms; erro absoluto médio 9,23 ms; erro relativo médio 4,94%; 38 Baixo, cinco Atenção, cinco Preocupante. |
+| 4 | 36 registros de treino e 12 de teste; MAE 8,15 ms, MSE 81,51 ms², RMSE 9,03 ms, R² 0,9375; baseline com MAE 33,44 ms e RMSE 36,98 ms. |
+| 5 | Dez registros na heap; COM-01 (ciclo 7) é o primeiro atendimento, seguido de MED-01 (ciclo 7). |
+| 6 | Prefixos `com` e `MED` retornam oito registros cada; prefixo vazio é recusado pelo menu. |
+| 7 | Ciclo 7 = binário 111 = hexadecimal 7; 255 = 11111111 = FF; primeiro registro 24 V × 2,1 A = 50,40 W e R ≈ 11,43 Ω; maior potência 75,57 W (AGR-02, ciclo 4). |
+| 8 | Potência média 40,11 W e máxima 75,57 W; cinco alertas urgentes com justificativa, recomendações, validação humana e limitações. |
 
 ## Preservação
 
-O código principal e o CSV permanecem byte a byte iguais ao estado anterior.
+O CSV permanece igual ao original:
 
 | Arquivo | SHA-256 |
 | --- | --- |
-| `codigo_fonte.py` | `a6b32c2f3290bfccb252a224ee6930aefd60488d52d4219f12f24c536faecfe8` |
 | `dados_aurora_siger.csv` | `62d89c5fb767d5e35a19b23bcf1b7da7339d36a4621405b7a33545e050543ddc` |
 
-O manifesto de testes registra também hashes das seis funções anteriores de
-processamento e consulta. A futura integração do menu pode alterar a navegação,
-mas não deve modificar essas funções ou o CSV sem acordo do grupo.
+O manifesto `tests/preservacao_original.json` registra também os hashes das seis
+funções das opções 1 a 4, calculados antes da integração do menu. Durante a
+integração, cinco delas receberam correções de textos exibidos e de navegação;
+`classificar_erro_relativo` permanece igual.
 
-## Pendências para entrega final
+## Pacote de entrega
 
-1. Integrar as opções 5 a 8 na branch `feat/menu-terminal` e conferir sua navegação.
-2. Atualizar README e relatório para refletir o estado integrado.
-3. Gravar e publicar o vídeo de até cinco minutos como Não listado.
-4. Substituir o conteúdo provisório de `link_video.txt` pelo endereço real e
+`scripts/preparar_entrega.py` não encontra chamadas provisórias no menu. A única
+pendência apontada pelo empacotador é a ausência de um link válido em
+`link_video.txt`.
+
+## Pendências para a entrega final
+
+1. Gravar e publicar o vídeo de até cinco minutos como Não listado.
+2. Substituir o conteúdo provisório de `link_video.txt` pelo endereço real e
    conferir duração e acesso manualmente.
-5. Gerar o ZIP final e repetir a conferência em uma pasta extraída.
+3. Gerar o ZIP final e repetir a instalação e os testes em uma pasta extraída.
 
-A validação atual comprova os módulos e preservação, não a integração pendente
-da interface nem uma publicação no YouTube ou submissão acadêmica.
+A validação não comprova a publicação no YouTube nem a submissão acadêmica.
