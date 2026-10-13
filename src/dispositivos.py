@@ -34,3 +34,4 @@ def analisar_dispositivos(dados: pd.DataFrame) -> pd.DataFrame:
     unidades.update(UNIDADES_ELETRICAS)
     resultado.attrs["unidades"] = unidades
     return resultado
+

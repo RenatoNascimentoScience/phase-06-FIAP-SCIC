@@ -728,6 +728,186 @@ def buscar_registros_prefixo(dados):
 
         enter()
 
+
+#Função para analisar os dispositivos e converter as bases numéricas - Menu 7
+def exibir_bases_eletricidade(dados):
+    if dados is None:
+        print("\nNenhum dado está disponível para análise.")
+        enter()
+        return
+ 
+    # Submenu mantido em execução até o usuário escolher 0 - Voltar
+    while True:
+        limpar_tela()
+ 
+        print("=" * 70)
+        print("BASES NUMÉRICAS E DADOS ELÉTRICOS - AURORA SIGER")
+        print("=" * 70)
+ 
+        print("1 - Converter Valor entre Bases Numéricas")
+        print("2 - Analisar Dados Elétricos (Tensão, Corrente e Potência)")
+        print("3 - Dispositivos de Entrada e Saída")
+        print("0 - Voltar")
+        print("=" * 70)
+ 
+        opcao_bases = input("Escolha uma opção: ").strip()
+ 
+        if opcao_bases == "0":
+            return
+        elif opcao_bases == "1":
+            converter_valor_bases(dados)
+        elif opcao_bases == "2":
+            analisar_dados_eletricos(dados)
+        elif opcao_bases == "3":
+            exibir_dispositivos_entrada_saida()
+        else:
+            print("\nOpção inválida.")
+ 
+        enter()
+ 
+# Conversão decimal -> binário -> hexadecimal utilizando src/dispositivos.py
+def converter_valor_bases(dados):
+    limpar_tela()
+ 
+    print("=" * 70)
+    print("CONVERSÃO ENTRE BASES NUMÉRICAS")
+    print("=" * 70)
+ 
+    # Exemplo automático: os ciclos da base representados nas três bases
+    print("\nCICLOS DA BASE EM DECIMAL, BINÁRIO E HEXADECIMAL")
+    print("-" * 70)
+    print(f"{'Decimal':>8} | {'Binário':>8} | {'Hexadecimal':>11}")
+ 
+    for ciclo in sorted(dados["ciclo"].unique()):
+        bases = converter_bases(int(ciclo)) # int() garante um inteiro Python, e não um tipo do NumPy
+        print(f"{bases['decimal']:>8} | {bases['binario']:>8} | {bases['hexadecimal']:>11}")
+ 
+    # Conversão de um valor informado pelo usuário
+    entrada = input("\nDigite um número inteiro não negativo para converter: ").strip()
+ 
+    try:
+        valor = int(entrada) # Texto que não representa um inteiro gera ValueError
+        bases = converter_bases(valor) # Valores negativos também geram ValueError
+    except ValueError:
+        print("\nValor inválido. Digite um número inteiro igual ou maior que zero.")
+        return
+ 
+    print("\nRESULTADO DA CONVERSÃO")
+    print("-" * 70)
+    print(f"Decimal:..........{bases['decimal']}")
+    print(f"Binário:..........{bases['binario']}")
+    print(f"Hexadecimal:......{bases['hexadecimal']}")
+    print(f"Bits necessários:.{len(bases['binario'])}")
+ 
+    print(
+        "\nOs sistemas digitais armazenam valores em binário. O hexadecimal "
+        "agrupa 4 bits por dígito e torna códigos de sensores e endereços "
+        "mais curtos e legíveis para a equipe."
+    )
+ 
+# Cálculo de potência (P = V x I) e resistência equivalente (Lei de Ohm: R = V / I)
+def analisar_dados_eletricos(dados):
+    limpar_tela()
+ 
+    try:
+        eletricos = analisar_dispositivos(dados) # Retorna uma cópia com a coluna potencia_w
+    except ValueError as erro:
+        print(f"\nErro ao analisar os dados elétricos: {erro}")
+        return
+ 
+    unidades = eletricos.attrs["unidades"] # {"tensao_v": "V", "corrente_a": "A", "potencia_w": "W"}
+ 
+    print("=" * 70)
+    print("DADOS ELÉTRICOS DOS DISPOSITIVOS - AURORA SIGER")
+    print("=" * 70)
+ 
+    # Exemplo de cálculo detalhado com o primeiro registro da base
+    exemplo = eletricos.iloc[0]
+    tensao = exemplo["tensao_v"]
+    corrente = exemplo["corrente_a"]
+    potencia = exemplo["potencia_w"]
+ 
+    print("\nEXEMPLO DE CÁLCULO (PRIMEIRO REGISTRO)")
+    print("-" * 70)
+    print(f"Módulo: {exemplo['modulo']} | Sensor: {exemplo['codigo_sensor']}")
+    print(f"Potência:     P = V x I = {tensao:.2f}{unidades['tensao_v']} x "
+          f"{corrente:.2f}{unidades['corrente_a']} = {potencia:.2f}{unidades['potencia_w']}")
+ 
+    # Lei de Ohm calculada apenas na apresentação, sem alterar src/dispositivos.py
+    if corrente > 0:
+        print(f"Lei de Ohm:   R = V / I = {tensao:.2f}V / {corrente:.2f}A = {tensao / corrente:.2f}Ω")
+ 
+    # Médias por módulo, preservando a ordem em que os módulos aparecem no CSV
+    resumo = eletricos.groupby("modulo", sort=False).agg(
+        tensao_media_v=("tensao_v", "mean"),
+        corrente_media_a=("corrente_a", "mean"),
+        potencia_media_w=("potencia_w", "mean"),
+        potencia_maxima_w=("potencia_w", "max"),
+    ).round(2)
+ 
+    print("\nMÉDIAS POR MÓDULO")
+    print("-" * 70)
+    print(resumo.to_string())
+ 
+    # Registro com maior potência de alimentação
+    maior = eletricos.loc[eletricos["potencia_w"].idxmax()]
+ 
+    print("\nMAIOR POTÊNCIA REGISTRADA")
+    print("-" * 70)
+    print(f"Módulo: {maior['modulo']} | Sensor: {maior['codigo_sensor']} | Ciclo: {maior['ciclo']}")
+    print(f"{maior['tensao_v']:.2f}V x {maior['corrente_a']:.2f}A = {maior['potencia_w']:.2f}W "
+          f"| Status: {maior['status']}")
+ 
+    print("\nINTERPRETAÇÃO")
+    print("-" * 70)
+    print(
+        "Quedas de tensão ou aumentos de corrente podem indicar sobrecarga "
+        "ou falha na alimentação, mas não comprovam sozinhos a causa de uma latência alta."
+    )
+    print(
+        "A potência calculada é a de alimentação do dispositivo (W). Ela não representa "
+        "a potência irradiada pela antena nem a energia consumida (Wh)."
+    )
+ 
+# Explicação conceitual de dispositivos de entrada e saída do SCIC
+def exibir_dispositivos_entrada_saida():
+    limpar_tela()
+ 
+    print("=" * 70)
+    print("DISPOSITIVOS DE ENTRADA E SAÍDA DO SCIC")
+    print("=" * 70)
+ 
+    print("\nENTRADA DE DADOS")
+    print("-" * 70)
+    print("- Sensores simulados de latência, tensão e corrente (ex.: COM-01, MED-02).")
+    print("- Arquivo dados_aurora_siger.csv, que representa as leituras coletadas.")
+    print("- Teclado, utilizado pelo operador para navegar no menu e fazer consultas.")
+ 
+    print("\nSAÍDA DE DADOS")
+    print("-" * 70)
+    print("- Terminal, que exibe tabelas, alertas priorizados e análises.")
+    print("- Relatório técnico, que registra resultados e decisões.")
+    print("- Em um sistema real: painel de monitoramento ou alarmes para a equipe.")
+ 
+    print("\nINTERFACES DE COMUNICAÇÃO (CONCEITUAIS)")
+    print("-" * 70)
+    print("- Rede cabeada: enlace principal entre módulos essenciais.")
+    print("- Wi-Fi: sensores distribuídos dentro dos módulos.")
+    print("- Bluetooth: leitura de curto alcance durante a manutenção.")
+    print("- USB: coleta manual de dados ou atualização de dispositivos.")
+ 
+    print("\nCÓDIGOS DE SENSORES EM OUTRAS BASES")
+    print("-" * 70)
+ 
+    # Exemplo: número do sensor COM-01 representado nas três bases
+    bases = converter_bases(1)
+    print(
+        f"O número do sensor COM-01 pode ser armazenado como decimal {bases['decimal']}, "
+        f"binário {bases['binario'].zfill(8)} ou hexadecimal 0x{bases['hexadecimal'].zfill(2)}."
+    )
+    print("Internamente, os dispositivos identificam sensores e mensagens em binário.")
+
+
 # Função de exibiçã oda análise geral do sistema - Menu 8
 def exibir_analise_geral(dados):
     if dados is None:
@@ -961,7 +1141,7 @@ def main():
         elif opcao == "6":
             buscar_registros_prefixo(dados)
         elif opcao == "7":
-            funcionalidade_em_desenvolvimento("Bases Numéricas e Dados Elétricos")
+            exibir_bases_eletricidade(dados)
         elif opcao == "8":
             exibir_analise_geral(dados)
             enter()
