@@ -197,14 +197,19 @@ def consultar_registros(dados):
             continue
         
         # Exibindo o resultado da pesquisa
-        if resultado.empty:
-            print("\nNenhum registro encontrado.")
-        else:
+        if not resultado.empty:
+            print("\nMÓDULOS ENCONTRADOS:")
+            
+            for modulo in sorted(resultado["modulo"].unique()):
+                print(f"- {modulo}")
+
             print("\n" + "=" * 60)
             print(f"REGISTROS ENCONTRADOS: {len(resultado)}")
             print("=" * 60)
 
             print(resultado[colunas_exibicao].to_string(index=False)) # Transforma tabela Pandas em texto.
+        else:
+            print("\nNenhum registro encontrado.")
 
         enter()
     
@@ -621,6 +626,107 @@ def analisar_alertas_prioridade(dados):
             "o alerta mais urgente."
         )
 
+# Função para buscar registros por prefixo utilizando Trie - Menu 6
+def buscar_registros_prefixo(dados):
+    if dados is None:
+        print("\nNenhum dado está disponível para busca.")
+        return
+    
+    # Mantém o submenu em execução até o usuário escolher 0 - Voltar
+    while True:
+        limpar_tela()
+        
+        print("=" * 70)
+        print("BUSCA DE REGISTROS POR PREFIXO COM TRIE - AURORA SIGER")
+        print("=" * 70)
+
+        print("1 - Buscar por Nome do Módulo")
+        print("2 - Buscar por Código do Sensor")
+        print("0 - Voltar")
+        print("=" * 70)
+
+        opcao_busca = input("Escolha o tipo de busca: ").strip()
+
+        # volta ao menu principal
+        if opcao_busca == "0":
+            return
+        
+        # Define em qual coluna a Trie realizara a pesquisa
+        if opcao_busca == "1":
+            campo = "modulo"
+            descricao = "modulo"
+        elif opcao_busca == "2":
+            campo = "codigo_sensor"
+            descricao = "sensor"
+        else:
+            print("\nOpção inválida.")
+            enter()
+            continue
+
+        limpar_tela()
+
+        print("=" * 70)
+        print(f"BUSCA POR PREFIXO - {descricao.upper()}")
+        print("=" * 70)
+
+        prefixo = input(f"\nDigite o prefixo do {descricao}: ").strip()
+
+        # Evitando que a busca vazia mostre todos os 48 registros
+        if prefixo == "":
+            print("\nDigite pelo menos um caractere para realizar a busca.")
+            enter()
+            continue
+
+        try:
+            resultado = buscar_por_prefixo( # Implementando a Trie - src/busca.py
+                dados,
+                campo,
+                prefixo
+            )
+        except ValueError as erro:
+            print(f"\nErro ao realizar a busca: {erro}")
+            enter()
+            continue
+
+        # Verificando se algum registro foi encontrado
+        if resultado.empty:
+            print(f"Nenhum registro encontrado com o prefixo '{prefixo}'.")
+
+        else:
+            print("\n" + "=" * 70)
+            print(f"REGISTROS ENCONTRADOS: {len(resultado)}")
+            print("=" * 70)
+
+            colunas_exibicao = [
+                "ciclo",
+                "modulo",
+                "codigo_sensor",
+                "latencia_prevista_ms",
+                "latencia_observada_ms",
+                "status",
+                "prioridade",
+                "criticidade",
+                "mensagem_alerta"
+            ]
+
+            print(resultado[colunas_exibicao].to_string(index=False))
+
+        print("\nCOMO A TRIE REALIZA A BUSCA?")
+        print("-" * 70)
+
+        print("A Trie organiza palavras e códigos compartilhando os caracteres iniciais.")
+
+        print(
+            "Assim, o sistema percorre o prefixo informado e localiza "
+            "os registros associados àquele caminho."
+        )
+
+        print(
+            "Essa estrutura é especialmente adqueada para pesquisas "
+            "por prefixo, como nomes de módulos e códigos de sensores."
+        )
+
+        enter()
 
 # Exibindo o menu principal SCIC
 def exibir_menu():
@@ -674,7 +780,7 @@ def main():
             enter()
             limpar_tela()
         elif opcao == "6":
-            funcionalidade_em_desenvolvimento("Buscar Registros por Prefixo")
+            buscar_registros_prefixo(dados)
         elif opcao == "7":
             funcionalidade_em_desenvolvimento("Bases Numéricas e Dados Elétricos")
         elif opcao == "8":
