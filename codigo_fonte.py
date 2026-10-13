@@ -31,15 +31,16 @@ def carregar_dados(exibir_mensagem=False): # Define se o sistema mostra a inform
     try:
         dados = pd.read_csv(arquivo_dados)
         
-        print("\nDados da Aurora Siger carregados com sucesso.")
-        print(f"Registros Carregados: {len(dados)}")
-        print(f"Colunas Encontradas: {len(dados.columns)}")
+        if exibir_mensagem:
+            print("\nDados da Aurora Siger carregados com sucesso.")
+            print(f"Registros Carregados: {len(dados)}")
+            print(f"Colunas Encontradas: {len(dados.columns)}")
 
         return dados
     
     except FileNotFoundError:
         print("\nERRO: o arquivo 'dados_aurora_siger.csv' não foi encontrado.")
-        print("Matenha o arquivo CSV na mesma posta de 'codigo_fonte.py'.")
+        print("Mantenha o arquivo CSV na mesma posta de 'codigo_fonte.py'.")
 
     except pd.errors.EmptyDataError:
         print("\nERRO: o arquivo CSV está vazio.")
@@ -52,7 +53,7 @@ def carregar_dados(exibir_mensagem=False): # Define se o sistema mostra a inform
 # Exibindo uma visao simples da base carregada - Menu 1
 def visualizar_dados(dados):
     if dados is None:
-        print("\nNenhum dado est[a disponível para visualização.")
+        print("\nNenhum dado está disponível para visualização.")
         return
     
     print("\n" + "=" * 60)
@@ -160,7 +161,7 @@ def consultar_registros(dados):
 
             print("\nStatus Disponíveis:")
             print("- Ativo")
-            print("- Manutenção")
+            print("- Manutencao")
             print("- Alerta")
 
             pesquisa = input("\nDigite o status: ").strip()
@@ -169,7 +170,7 @@ def consultar_registros(dados):
                 dados["status"].str.lower() == pesquisa.lower()
             ]
 
-        # Colsunta por ciclo
+        # Consulta por ciclo
         elif opcao_consulta == "4":
             limpar_tela()
 
@@ -186,7 +187,7 @@ def consultar_registros(dados):
             
             except ValueError:
                 print("\nCiclo inválido. Digite um número inteiro.")
-                return
+                continue
 
         # Voltar sem realizar consulta
         elif opcao_consulta == "0":
@@ -225,7 +226,7 @@ def classificar_erro_relativo(erro_relativo):
 # Função para calcular os indicadores operacionais e erros numéricos
 def calcular_indicadores_erros(dados):
     if dados is None:
-        print("\nNenhum dado está dispon[ivel para análise.")
+        print("\nNenhum dado está disponível para análise.")
         return dados
     
     # Cria uma cópia para preservar os dados originais carregados
@@ -298,7 +299,7 @@ def calcular_indicadores_erros(dados):
     print("Acima de 5% -----> Atenção")
     print("Acima de 15% ----> Preocupante")
 
-    # Mosntrando os registros com maiores erros relativos
+    # Mostrando os registros com maiores erros relativos
     maiores_erros = dados_calculados.sort_values(
         by="erro_relativo_pct",
         ascending=False
@@ -384,7 +385,7 @@ def executar_modelo_previsao(dados):
 
     variavel_resposta = "latencia_observada_ms"
 
-    # dropna() para remover evetuais registros incompletos apenas nas colunas
+    # dropna() para remover eventuais registros incompletos apenas nas colunas
     dados_modelo = dados[variaveis_entrada + [variavel_resposta]].dropna()
 
     # X contendo as variáveis utilizadas para realizar a previsão
@@ -908,7 +909,7 @@ def exibir_dispositivos_entrada_saida():
     print("Internamente, os dispositivos identificam sensores e mensagens em binário.")
 
 
-# Função de exibiçã oda análise geral do sistema - Menu 8
+# Função de exibição oda análise geral do sistema - Menu 8
 def exibir_analise_geral(dados):
     if dados is None:
         print("\nNenhum dado está disponível para análise.")
@@ -1103,10 +1104,6 @@ def exibir_menu():
     print("8 - Análise Geral do Sistema")
     print("0 - Encerrar")
     print("=" * 60)
-
-# Mensagem temporária para próxima etapa
-def funcionalidade_em_desenvolvimento(nome):
-    print(f"\n'{nome}' será implementado nas próximas etapas do projeto.")
 
 # Função principal do sistema que carrega os dados e mantém o menu em execução.
 def main():
