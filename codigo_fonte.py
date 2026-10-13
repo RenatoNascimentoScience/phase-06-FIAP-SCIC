@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from pathlib import Path # Manipular caminhos com POO independenteo do SO
+from pathlib import Path # Manipular caminhos com POO independente do SO
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -15,10 +15,10 @@ from src.analise import gerar_analise_final
 # Caminho da pasta onde o arquivo Python está localizado
 pasta_projeto = Path(__file__).resolve().parent
 
-# Arquivo de dados .CSV utiliazdo no projeto
+# Arquivo de dados .CSV utilizado no projeto
 arquivo_dados = pasta_projeto / "dados_aurora_siger.csv"
 
-# Função para limpar o temrinal
+# Função para limpar o terminal
 def limpar_tela():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -26,7 +26,7 @@ def limpar_tela():
 def enter():
     input("\nPressione 'ENTER' para voltar ao menu principal...")
 
-# Carregadi a base de dados simulados da Aurora Siger a partir do .CSV
+# Carregado a base de dados simulados da Aurora Siger a partir do .CSV
 def carregar_dados(exibir_mensagem=False): # Define se o sistema mostra a informação de carregamento.
     try:
         dados = pd.read_csv(arquivo_dados)
@@ -49,7 +49,7 @@ def carregar_dados(exibir_mensagem=False): # Define se o sistema mostra a inform
 
     return None
 
-# Exibindo uma vis'ao simples da base carregada - Menu 1
+# Exibindo uma visao simples da base carregada - Menu 1
 def visualizar_dados(dados):
     if dados is None:
         print("\nNenhum dado est[a disponível para visualização.")
@@ -528,7 +528,7 @@ def executar_modelo_previsao(dados):
         "As métricas devem ser interpretadas em conjunto."
     )
 
-# Função de análise e priorização da alertas utilizando heap - Menu 5
+# Função de análise e priorização de alertas utilizando heap - Menu 5
 def analisar_alertas_prioridade(dados):
     if dados is None:
         print("\nNenhum dado está disponível para análise.")
@@ -540,7 +540,7 @@ def analisar_alertas_prioridade(dados):
 
     # Selecionando somente os registros que precisam de atenção
     registros_alertas = dados[
-        dados["status"].isin(["Alerta", "Manutencao"]) # isin() verifica se os valroes da coluna pertencem a uma lista de valroes específicos
+        dados["status"].isin(["Alerta", "Manutencao"]) # isin() verifica se os valores da coluna pertencem a uma lista de valores específicos
     ]
 
     if registros_alertas.empty:
@@ -588,7 +588,7 @@ def analisar_alertas_prioridade(dados):
         print(f"Módulo Essencial: {essencial}")
         print(f"Latência Prevista: {alerta_urgente['latencia_prevista_ms']}ms")
         print(f"Latência Observada: {alerta_urgente['latencia_observada_ms']}ms")
-        print(f"Menssagem: {alerta_urgente['mensagem_alerta']}")
+        print(f"Mensagem: {alerta_urgente['mensagem_alerta']}")
 
         # Mostrando os alertas organizados pela prioridade do heap
         alertas_ordenados = [item["registro"] for item in fila_alertas.listar()]
@@ -617,7 +617,7 @@ def analisar_alertas_prioridade(dados):
 
         print(
             "Uma lista simples armazena os alertas, mas pode exigir "
-            "uma busca ou ordena;'ao para identificar o mais urgente."
+            "uma busca ou ordenação para identificar o mais urgente."
         )
 
         print(
@@ -722,7 +722,7 @@ def buscar_registros_prefixo(dados):
         )
 
         print(
-            "Essa estrutura é especialmente adqueada para pesquisas "
+            "Essa estrutura é especialmente adequada para pesquisas "
             "por prefixo, como nomes de módulos e códigos de sensores."
         )
 
@@ -929,7 +929,7 @@ def exibir_analise_geral(dados):
     print("\nRESUMO OPERACIONAL")
     print("-" * 70)
 
-    print(f"Total de Registros: {analise["total_registros"]}")
+    print(f"Total de Registros: {analise['total_registros']}")
 
     print("\nRegistros por Status:")
 
@@ -1010,7 +1010,7 @@ def exibir_analise_geral(dados):
         for posicao, recomendacao in enumerate(recomendacoes, start=1):
             print(
                 f"\n{posicao}. Sensor: "
-                f"{recomendacao["codigo_sensor"]} | " 
+                f"{recomendacao['codigo_sensor']} | " 
                 f"Ciclo: {recomendacao['ciclo']}"
             )
 
@@ -1024,7 +1024,7 @@ def exibir_analise_geral(dados):
                 f"{recomendacao['justificativa']}"
             )
 
-    # Gerencimaneto Inteligente
+    # Gerenciamento Inteligente
     print("\nGERENCIAMENTO INTELIGENTE DA COMUNICAÇÃO")
     print("-" * 70)
 
@@ -1044,7 +1044,7 @@ def exibir_analise_geral(dados):
     )
 
     print(
-        "O armazenamento do histórico pode preservar evidênciais "
+        "O armazenamento do histórico pode preservar evidências "
         "para inspeção e manutenção."
     )
 
