@@ -728,6 +728,185 @@ def buscar_registros_prefixo(dados):
 
         enter()
 
+# Função de exibiçã oda análise geral do sistema - Menu 8
+def exibir_analise_geral(dados):
+    if dados is None:
+        print("\nNenhum dado está disponível para análise.")
+        return
+    
+    try:
+        analise = gerar_analise_final(dados) # src/analise.py
+
+    except ValueError as erro:
+        print(f"\nErro ao gerar a análise geral: {erro}")
+        return
+    
+    print("=" * 70)
+    print("ANÁLISE GERAL DO SISTEMA - AURORA SIGER")
+    print("=" * 70)
+
+    # Resumo
+    print("\nRESUMO OPERACIONAL")
+    print("-" * 70)
+
+    print(f"Total de Registros: {analise["total_registros"]}")
+
+    print("\nRegistros por Status:")
+
+    for status, quantidade in analise["registros_por_status"].items():
+        print(f"- {status}: {quantidade}")
+
+    latencia_media = analise["latencia_observada_media_ms"]
+
+    if latencia_media is not None:
+        print(f"\nLatência Observada Média:  {latencia_media:.2f}ms")
+
+    print(f"Alertas Priorizados: {analise['total_alertas_priorizados']}")
+
+    # Resumo Elétrico
+    print("\nRESUMO ELÉTRICO")
+    print("-" * 70)
+
+    resumo_eletrico = analise["resumo_eletrico"]
+
+    potencia_media = resumo_eletrico["potencia_media_w"]
+    potencia_maxima = resumo_eletrico["potencia_maxima_w"]
+
+    if potencia_media is not None:
+        print(f"Potência Média: {potencia_media:.2f}W")
+    
+    if potencia_maxima is not None:
+        print(f"Potência Máxima: {potencia_maxima:.2f}W")
+
+    # Alertas Urgentes
+    print("\nALERTAS MAIS URGENTES")
+    print("-" * 70)
+
+    alertas = analise["alertas_mais_urgentes"]
+
+    if len(alertas) == 0:
+        print("Nenhum alerta prioritário encontrado.")
+    else:
+        for posicao, alerta in enumerate(alertas, start=1):
+            registro = alerta["registro"]
+
+            print(
+                f"\n{posicao}. "
+                f"{registro['modulo']} | "
+                f"Sensor: {registro['codigo_sensor']} | "
+                f"Ciclo: {registro['ciclo']}"
+            )
+
+            print(
+                f"    Prioridade: {registro['prioridade']} | "
+                f"Criticidade: {registro['criticidade']}"
+            )
+
+            print(
+                f"    Latência Prevista: "
+                f"{registro['latencia_prevista_ms']}ms"
+            )
+
+            print(
+                f"    Latência Observada: "
+                f"{registro['latencia_observada_ms']}ms"
+            )
+
+            print(
+                f"    Justificativa: "
+                f"{alerta['justificativa']}"
+            )
+
+    # Recomendações
+    print("\nRECOMENDAÇÕES OPERACIONAIS")
+    print("-" * 70)
+
+    recomendacoes = analise["recomendacoes"]
+
+    if len(recomendacoes) == 0:
+        print("Nenhuma recomendação necessária.")
+
+    else:
+        for posicao, recomendacao in enumerate(recomendacoes, start=1):
+            print(
+                f"\n{posicao}. Sensor: "
+                f"{recomendacao["codigo_sensor"]} | " 
+                f"Ciclo: {recomendacao['ciclo']}"
+            )
+
+            print(
+                f"    Ação Proposta: "
+                f"{recomendacao['acao_proposta']}"
+            )
+
+            print(
+                f"    Justificativa: "
+                f"{recomendacao['justificativa']}"
+            )
+
+    # Gerencimaneto Inteligente
+    print("\nGERENCIAMENTO INTELIGENTE DA COMUNICAÇÃO")
+    print("-" * 70)
+
+    print(
+        "Os sensores simulados fornecem dados como latência, "
+        "tensão e corrente para acompanhamento da colônia."
+    )
+
+    print(
+        "O monitoramento contínuo poderia comparar novas leituras "
+        "e identificar recorrências ou condições anormais."
+    )
+
+    print(
+        "A fila de prioridade com heap apoia a automação da "
+        "organização dos atendimentos mais urgentes."
+    )
+
+    print(
+        "O armazenamento do histórico pode preservar evidênciais "
+        "para inspeção e manutenção."
+    )
+
+    print(
+        "Enlaces redundantes podem aumentar a disponibilidade "
+        "da comunicação em situações críticas."
+    )
+
+    print(
+        "Uma microrrede poderia ajudar a manter sistemas de "
+        "comunicação essenciais, mas exigiria dados adicionais "
+        "sobre geração, reserva e consumo de energia."
+    )
+
+    print(
+        "A base atual não possui histórico suficiente para afirmar "
+        "que existe manutenção preditiva treinada."
+    )
+
+    # Validação humana
+    print("\nVALIDAÇÃO HUMANA")
+    print("-" * 70)
+
+    validacao = analise["validacao_humana"]
+
+    if isinstance(validacao, list): # isinstance() para validar se uma variavel ou objeto pertence a determinado tipo de dado ou classe
+        for item in validacao:
+            print(f"- {item}")
+    else:
+        print(validacao)
+
+    # Limitações
+    print("\nLIMITAÇÕES DO PROTÓTIPO")
+    print("-" * 70)
+
+    for limitacao in analise["limitacoes"]:
+        print(f"- {limitacao}")
+
+    print("\n" + "=" * 70)
+    print("FIM DA ANÁLISE GERAL")
+    print("=" * 70)
+
 # Exibindo o menu principal SCIC
 def exibir_menu():
     print("\n" + "=" * 60)
@@ -784,7 +963,9 @@ def main():
         elif opcao == "7":
             funcionalidade_em_desenvolvimento("Bases Numéricas e Dados Elétricos")
         elif opcao == "8":
-            funcionalidade_em_desenvolvimento("Análise Geral do Sistema")
+            exibir_analise_geral(dados)
+            enter()
+            limpar_tela()
         elif opcao == "0":
             print("\nSISTEMA ENCERRADO.")
             break
