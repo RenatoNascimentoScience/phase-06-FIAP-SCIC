@@ -2,9 +2,15 @@ import os
 import pandas as pd
 import numpy as np
 from pathlib import Path # Manipular caminhos com POO independenteo do SO
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+from src.alertas import FilaAlertas
+from src.busca import buscar_por_prefixo
+from src.dispositivos import analisar_dispositivos, converter_bases
+from src.analise import gerar_analise_final
 
 # Caminho da pasta onde o arquivo Python está localizado
 pasta_projeto = Path(__file__).resolve().parent
@@ -517,6 +523,105 @@ def executar_modelo_previsao(dados):
         "As métricas devem ser interpretadas em conjunto."
     )
 
+# Função de análise e priorização da alertas utilizando heap - Menu 5
+def analisar_alertas_prioridade(dados):
+    if dados is None:
+        print("\nNenhum dado está disponível para análise.")
+        return
+    
+    print("=" * 70)
+    print("PRIORIZAÇÃO DE ALERTAS COM HEAP - AURORA SIGER")
+    print("=" * 70)
+
+    # Selecionando somente os registros que precisam de atenção
+    registros_alertas = dados[
+        dados["status"].isin(["Alerta", "Manutencao"]) # isin() verifica se os valroes da coluna pertencem a uma lista de valroes específicos
+    ]
+
+    if registros_alertas.empty:
+        print("\nNenhum alerta ou registro em manutenção foi encontrado.")
+        return 
+    
+    # Criando a fila de prioridade src/alertas.py
+    fila_alertas = FilaAlertas()
+
+    # Inserindo cada registro na estrutura heap
+    for _, registro in registros_alertas.iterrows(): # iterrows() percorre o DF linha por linha, permitindo acessar os valores de cada registro individualmente
+        fila_alertas.inserir(registro.to_dict())
+
+    print(f"\nRegistros priorizados: {len(registros_alertas)}")
+
+    print("\nCRITÉRIOS DE PRIORIDADE")
+    print("-" * 70)
+    print("1 - Prioridade")
+    print("2 - Criticidade")
+    print("3 - Módulo Essencial")
+    print("4 - Ciclo do Registro")
+
+    # Recuperando o alerta de maior prioridade
+    resultado_urgente = fila_alertas.proximo()
+
+    if resultado_urgente is not None:
+        alerta_urgente = resultado_urgente["registro"]
+
+        print("\nALERTA MAIS URGENTE")
+        print("-" * 70)
+
+        print(f"Módulo: {alerta_urgente['modulo']}")
+        print(f"Sensor: {alerta_urgente['codigo_sensor']}")
+        print(f"Status: {alerta_urgente['status']}")
+        print(f"Ciclo: {alerta_urgente['ciclo']}")
+        print(f"Prioridade: {alerta_urgente['prioridade']}")
+        print(f"Criticidade: {alerta_urgente['criticidade']}")
+
+        essencial = (
+            "Sim"
+            if alerta_urgente["modulo_essencial"] == 1
+            else "Não"
+        )
+
+        print(f"Módulo Essencial: {essencial}")
+        print(f"Latência Prevista: {alerta_urgente['latencia_prevista_ms']}ms")
+        print(f"Latência Observada: {alerta_urgente['latencia_observada_ms']}ms")
+        print(f"Menssagem: {alerta_urgente['mensagem_alerta']}")
+
+        # Mostrando os alertas organizados pela prioridade do heap
+        alertas_ordenados = [item["registro"] for item in fila_alertas.listar()]
+
+        print("\nFILA DE ALERTAS PRIORIZADA")
+        print("-" * 70)
+
+        for posicao, alerta in enumerate(alertas_ordenados, start=1):
+            essencial = (
+                "Sim"
+                if alerta["modulo_essencial"] == 1
+                else "Não"
+            )
+
+            print(
+                f"{posicao}. "
+                f"{alerta['modulo']} | "
+                f"Sensor: {alerta['codigo_sensor']} | "
+                f"Prioridade: {alerta['prioridade']} | "
+                f"Criticidade: {alerta['criticidade']} | "
+                f"Essencial: {essencial}"
+            )
+
+        print("\nPOR QUE UTILIZAR HEAP?")
+        print("-" * 70)
+
+        print(
+            "Uma lista simples armazena os alertas, mas pode exigir "
+            "uma busca ou ordena;'ao para identificar o mais urgente."
+        )
+
+        print(
+            "O heap mantém os registros organizados de acordo com "
+            "a prioridade, permitindo acessar de forma eficiente "
+            "o alerta mais urgente."
+        )
+
+
 # Exibindo o menu principal SCIC
 def exibir_menu():
     print("\n" + "=" * 60)
@@ -565,7 +670,9 @@ def main():
             enter()
             limpar_tela()
         elif opcao == "5":
-            funcionalidade_em_desenvolvimento("Analisar Alertas por Prioridade")
+            analisar_alertas_prioridade(dados)
+            enter()
+            limpar_tela()
         elif opcao == "6":
             funcionalidade_em_desenvolvimento("Buscar Registros por Prefixo")
         elif opcao == "7":
